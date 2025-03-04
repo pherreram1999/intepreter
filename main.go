@@ -11,7 +11,7 @@ func main() {
 		// se lanza el modo REPL
 		repl()
 	} else if noArgs == 1 {
-		// se espera sea un directorio que se encarga de extrair su contenido
+		// se espera sea un directorio que se encarga de extraer su contenido
 		path := args[0]
 		fileContent, err := os.ReadFile(path)
 		if err != nil {
