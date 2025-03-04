@@ -28,7 +28,6 @@ func repl() {
 		input = strings.TrimSuffix(input, "\n")
 		input = strings.TrimSpace(input)
 
-		fmt.Println("Len:", len(input))
 
 		switch input {
 		case "exit":
