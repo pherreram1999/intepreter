@@ -1,18 +1,15 @@
 package token
 
-type TipoToken uint
-
 const (
-	// reserved keys
-	Else   TipoToken = iota // 0
-	Fun    TipoToken = iota // 1
-	Print  TipoToken = iota
-	Var    TipoToken = iota
-	False  TipoToken = iota
-	If     TipoToken = iota
-	Return TipoToken = iota
-	While  TipoToken = iota
-	For    TipoToken = iota
-	Null   TipoToken = iota
-	True   TipoToken = iota
+	Else   TipoToken = "ELSE"
+	Fun    TipoToken = "FUN"
+	Print  TipoToken = "PRINT"
+	Var    TipoToken = "VAR"
+	False  TipoToken = "FALSE"
+	If     TipoToken = "IF"
+	Return TipoToken = "RETURN"
+	While  TipoToken = "WHILE"
+	For    TipoToken = "FOR"
+	Null   TipoToken = "NULL"
+	True   TipoToken = "TRUE"
 )

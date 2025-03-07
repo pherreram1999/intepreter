@@ -10,5 +10,5 @@ type Token struct {
 }
 
 func (t *Token) String() string {
-	return fmt.Sprintf(`<"%s">`, t.Lexema)
+	return fmt.Sprintf(`<%s>`, t.Tipo)
 }
