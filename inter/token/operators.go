@@ -1,4 +1,4 @@
-package tokens
+package token
 
 const (
 	Minus        TipoToken = iota
@@ -6,6 +6,7 @@ const (
 	Slash        TipoToken = iota //Division
 	Star         TipoToken = iota //Multiplicacion
 	Bang         TipoToken = iota //Diferente
+	BangEqual    TipoToken = iota
 	Equal        TipoToken = iota
 	EqualEqual   TipoToken = iota
 	Greater      TipoToken = iota

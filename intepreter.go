@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"pahm/intepreter/inter/scanner"
+)
 
 func execute(code string) {
-	fmt.Print(" ==== Printing: ====\n", code,"\n")
+	tokens := scanner.Scan(code)
+	for _, token := range tokens {
+		fmt.Println("Token", token)
+	}
 }
