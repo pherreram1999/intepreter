@@ -10,7 +10,7 @@ func Scan(source string) []*token.Token {
 	validators.Init()
 
 	var tokens []*token.Token
-	var lexama string
+	var lexema string
 	var state uint
 
 	sourceLen := len(source)
@@ -26,14 +26,14 @@ func Scan(source string) []*token.Token {
 
 		if state == 0 && character == '>' {
 			state = 1
-			lexama += string(character)
+			lexema += string(character)
 		} else if state == 1 {
-			lexama += string(character)
+			lexema += string(character)
 			if character == '=' {
 				state = 2
 				t := &token.Token{
 					Tipo:   token.GreaterEqual,
-					Lexema: lexama,
+					Lexema: lexema,
 					Linea:  linea,
 				}
 				tokens = append(tokens, t)
@@ -42,89 +42,89 @@ func Scan(source string) []*token.Token {
 				i-- // regresamos una pocision
 				t := &token.Token{
 					Tipo:   token.Greater,
-					Lexema: lexama,
+					Lexema: lexema,
 					Linea:  linea,
 				}
 				tokens = append(tokens, t)
 			}
-			lexama = ""
+			lexema = ""
 			state = 0
 
 		} else if state == 0 && character == '<' {
 			state = 4
-			lexama += string(character)
+			lexema += string(character)
 		} else if state == 4 { // menor o igual
-			lexama += string(character)
+			lexema += string(character)
 			if character == '=' {
 				tokens = append(tokens, &token.Token{
 					Tipo:   token.LessEqual,
-					Lexema: lexama,
+					Lexema: lexema,
 					Linea:  linea,
 				})
 			} else {
 				i--
 				tokens = append(tokens, &token.Token{
 					Tipo:   token.Less,
-					Lexema: lexama,
+					Lexema: lexema,
 					Linea:  linea,
 				})
 			}
 			state = 0
-			lexama = ""
+			lexema = ""
 		} else if state == 0 && character == '=' {
 			state = 7
-			lexama += string(character)
+			lexema += string(character)
 		} else if state == 7 {
-			lexama += string(character)
+			lexema += string(character)
 			if character == '=' {
 				tokens = append(tokens, &token.Token{
 					Tipo:   token.EqualEqual,
-					Lexema: lexama,
+					Lexema: lexema,
 					Linea:  linea,
 				})
 			} else {
 				i--
 				tokens = append(tokens, &token.Token{
 					Tipo:   token.Equal,
-					Lexema: lexama,
+					Lexema: lexema,
 					Linea:  linea,
 				})
 			}
 
-			lexama = ""
+			lexema = ""
 			state = 0
 		} else if state == 0 && character == '!' {
 			state = 10
-			lexama += string(character)
+			lexema += string(character)
 		} else if state == 10 {
-			lexama += string(character)
+			lexema += string(character)
 			if character == '=' {
 				tokens = append(tokens, &token.Token{
 					Tipo:   token.BangEqual,
-					Lexema: lexama,
+					Lexema: lexema,
 					Linea:  linea,
 				})
 			} else {
 				i--
 				tokens = append(tokens, &token.Token{
 					Tipo:   token.Bang,
-					Lexema: lexama,
+					Lexema: lexema,
 					Linea:  linea,
 				})
 			}
 
-			lexama = ""
+			lexema = ""
 			state = 0
 		} else if state == 0 && validators.IsLetter(string(character)) {
 			state = 13
-			lexama += string(character)
+			lexema += string(character)
 		} else if state == 13 {
 			if validators.IsLetterOrNumber(string(character)) {
-				lexama += string(character)
+				lexema += string(character)
 				// state = 13
 			} else {
 				// validar palabra resevada
-				lexama = ""
+				lexema = ""
 			}
 		}
 	}
