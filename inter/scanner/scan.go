@@ -124,7 +124,22 @@ func Scan(source string) []*token.Token {
 				// state = 13
 			} else {
 				// validar palabra resevada
+				if TipoToken, esReservada := validators.IsReservedWord(lexema); esReservada {
+					tokens = append(tokens, &token.Token{
+						Tipo:   TipoToken,
+						Lexema: lexema,
+						Linea:  linea,
+					})
+				} else {
+					tokens = append(tokens, &token.Token{
+						Tipo:   token.Identifier,
+						Lexema: lexema,
+						Linea:  linea,
+					})
+				}
 				lexema = ""
+				state = 0
+				i--
 			}
 		}
 	}
