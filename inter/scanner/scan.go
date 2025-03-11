@@ -1,6 +1,7 @@
 package scanner
 
 import (
+	"fmt"
 	"pahm/intepreter/inter/token"
 	"pahm/intepreter/inter/validators"
 	"unicode"
@@ -273,7 +274,7 @@ func Scan(source string) []*token.Token {
 				state = 0
 				lexema = ""
 			} else {
-				//state = 27
+				state = 27
 				lexema += string(character)
 			}
 		} else if state == 30 {
@@ -294,7 +295,7 @@ func Scan(source string) []*token.Token {
 				lexema = ""
 				i--
 			}
-		} else if TipoToken := validators.IsPunc(lexema); len(TipoToken) > 0 && state == 0 {
+		} else if TipoToken := validators.IsPunc(character); len(TipoToken) > 0 && state == 0 {
 			tokens = append(tokens, &token.Token{
 				Tipo:   TipoToken,
 				Lexema: lexema,
@@ -302,8 +303,10 @@ func Scan(source string) []*token.Token {
 			})
 			state = 0
 			lexema = ""
-			i--
+		} else {
+			panic(fmt.Sprintf("error: Simbolo no valido: %s", string(character)))
 		}
+		//fmt.Printf("State %d,caracter %s\n", state, string(character))
 	}
 
 	return tokens

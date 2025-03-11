@@ -2,27 +2,27 @@ package validators
 
 import "pahm/intepreter/inter/token"
 
-func IsPunc(p string) token.TipoToken {
+func IsPunc(p rune) token.TipoToken {
 	switch p {
-	case "+":
+	case '+':
 		return token.Plus
-	case "-":
+	case '-':
 		return token.Minus
-	case "*":
+	case '*':
 		return token.Star
-	case ";":
+	case ';':
 		return token.Semicolon
-	case ",":
+	case ',':
 		return token.Comma
-	case ".":
+	case '.':
 		return token.Dot
-	case "(":
+	case '(':
 		return token.LeftParen
-	case ")":
+	case ')':
 		return token.RightParen
-	case "{":
+	case '{':
 		return token.LeftBrace
-	case "}":
+	case '}':
 		return token.RightBrace
 	default:
 		return ""
