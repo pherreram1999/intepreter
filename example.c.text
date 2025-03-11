@@ -11,6 +11,6 @@ if edad > 15
 asdadsd
 */
 
-/n Hola mundo
-/t ola
-/r no c
+var mensaje = "Me canso ganzo, diria mi peje\n"
+
+nombre("Pedro",12)

@@ -283,28 +283,26 @@ func Scan(source string) []*token.Token {
 			} else {
 				lexema += string(character)
 			}
-		} else if state == 0 && unicode.IsSpace(character) || validators.IsDelim(string(character)) {
+		} else if state == 0 && unicode.IsSpace(character) || validators.IsDelim(character) {
 			lexema += string(character)
 			state = 33
 		} else if state == 33 {
-			if unicode.IsSpace(character) || validators.IsDelim(string(character)) {
+			if unicode.IsSpace(character) || validators.IsDelim(character) {
 				lexema += string(character)
 			} else {
 				state = 0
 				lexema = ""
 				i--
 			}
-		} else if state == 0 {
-			if TipoToken := validators.IsPunc(lexema); len(TipoToken) > 0 {
-				tokens = append(tokens, &token.Token{
-					Tipo:   TipoToken,
-					Lexema: lexema,
-					Linea:  linea,
-				})
-				state = 0
-				lexema = ""
-				i--
-			}
+		} else if TipoToken := validators.IsPunc(lexema); len(TipoToken) > 0 && state == 0 {
+			tokens = append(tokens, &token.Token{
+				Tipo:   TipoToken,
+				Lexema: lexema,
+				Linea:  linea,
+			})
+			state = 0
+			lexema = ""
+			i--
 		}
 	}
 

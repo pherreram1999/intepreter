@@ -1,14 +1,14 @@
 package validators
 
-func IsDelim(d string) bool {
+func IsDelim(d rune) bool {
 	switch d {
-	case " ":
+	case ' ':
 		return true
-	case "/n":
+	case '\n':
 		return true
-	case "/t":
+	case '\t':
 		return true
-	case "/r":
+	case '\r':
 		return true
 	default:
 		return false
