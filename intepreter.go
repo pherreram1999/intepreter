@@ -8,6 +8,6 @@ import (
 func execute(code string) {
 	tokens := scanner.Scan(code)
 	for _, token := range tokens {
-		fmt.Println("Token", token)
+		fmt.Println(token)
 	}
 }

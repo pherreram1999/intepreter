@@ -7,8 +7,8 @@ var letterOrNumberRegex *regexp.Regexp
 var NumberRegex *regexp.Regexp
 
 func Init() {
-	letterRegex = regexp.MustCompile(`/[a-z]/ig`)
-	letterOrNumberRegex = regexp.MustCompile(`/[a-z]|[0-9]/ig`)
+	letterRegex = regexp.MustCompile(`(?i)[a-z]`)
+	letterOrNumberRegex = regexp.MustCompile(`(?i)[a-z0-9]`)
 	NumberRegex = regexp.MustCompile(`[0-9]`)
 }
 

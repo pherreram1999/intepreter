@@ -1,11 +1,2 @@
-#include <conio.h>
-#include <stdio.h>
-
-int example()
-{
-    printf( "Hola mundo." );
-
-    getch(); /* Pausa */
-
-    return 0;
-}
+var edad = 12
+if edad > 15
