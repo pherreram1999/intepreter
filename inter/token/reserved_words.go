@@ -13,4 +13,5 @@ const (
 	Null       TipoToken = "NULL"
 	True       TipoToken = "TRUE"
 	Identifier TipoToken = "IDENTIFIER"
+	Input      TipoToken = "INPUT"
 )

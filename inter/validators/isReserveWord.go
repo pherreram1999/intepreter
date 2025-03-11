@@ -28,6 +28,8 @@ func IsReservedWord(word string) token.TipoToken {
 		return token.Null
 	case "true":
 		return token.True
+	case "input":
+		return token.Input
 	default:
 		return ""
 	}
