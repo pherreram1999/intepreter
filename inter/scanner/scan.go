@@ -215,6 +215,73 @@ func Scan(source string) []*token.Token {
 				lexema = ""
 				state = 0
 			}
+		} else if state == 0 && character == '"' {
+			state = 24
+		} else if state == 24 {
+			if character == '"' {
+
+				tokens = append(tokens, &token.Token{
+					Tipo:        token.String,
+					Lexema:      lexema,
+					PrintLexema: true,
+					Linea:       linea,
+					Literal:     lexema,
+				})
+
+				lexema = ""
+				state = 0
+			} else if character == '\n' {
+				panic("error: salto de linea")
+			} else {
+				lexema += string(character)
+			}
+		} else if state == 0 && character == '/' {
+			state = 26
+			lexema += string(character)
+		} else if state == 26 {
+			if character == '/' {
+				state = 30
+				lexema += string(character)
+			} else if character == '*' {
+				state = 27
+				lexema += string(character)
+			} else {
+				tokens = append(tokens, &token.Token{
+					Tipo:   token.Slash,
+					Lexema: lexema,
+					Linea:  linea,
+				})
+				lexema = ""
+				state = 0
+				i--
+			}
+		} else if state == 27 {
+			if character == '*' {
+				state = 28
+				lexema += string(character)
+			} else {
+				state = 27
+				lexema += string(character)
+			}
+			// de lo contrario se queda en 27
+		} else if state == 28 {
+			if character == '*' {
+				// se queda en el mismo
+				lexema += string(character)
+			} else if character == '/' {
+				state = 0
+				lexema = ""
+			} else {
+				//state = 27
+				lexema += string(character)
+			}
+		} else if state == 30 {
+			if character == '\n' {
+				state = 0
+				lexema += ""
+			} else {
+				lexema += string(character)
+			}
 		}
 	}
 
