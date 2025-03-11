@@ -1,33 +1,33 @@
 package validators
 
 import (
-	token2 "pahm/intepreter/inter/token"
+	"pahm/intepreter/inter/token"
 )
 
-func IsReservedWord(word string) token2.TipoToken {
+func IsReservedWord(word string) token.TipoToken {
 	switch word {
 	case "else":
-		return token2.Else
+		return token.Else
 	case "fun":
-		return token2.Fun
+		return token.Fun
 	case "print":
-		return token2.Print
+		return token.Print
 	case "var":
-		return token2.Var
+		return token.Var
 	case "false":
-		return token2.False
+		return token.False
 	case "if":
-		return token2.If
+		return token.If
 	case "return":
-		return token2.Return
+		return token.Return
 	case "while":
-		return token2.While
+		return token.While
 	case "for":
-		return token2.For
+		return token.For
 	case "null":
-		return token2.Null
+		return token.Null
 	case "true":
-		return token2.True
+		return token.True
 	default:
 		return ""
 	}
