@@ -3,6 +3,7 @@ package scanner
 import (
 	"pahm/intepreter/inter/token"
 	"pahm/intepreter/inter/validators"
+	"unicode"
 )
 
 func Scan(source string) []*token.Token {
@@ -281,6 +282,28 @@ func Scan(source string) []*token.Token {
 				lexema += ""
 			} else {
 				lexema += string(character)
+			}
+		} else if state == 0 && unicode.IsSpace(character) || validators.IsDelim(string(character)) {
+			lexema += string(character)
+			state = 33
+		} else if state == 33 {
+			if unicode.IsSpace(character) || validators.IsDelim(string(character)) {
+				lexema += string(character)
+			} else {
+				state = 0
+				lexema = ""
+				i--
+			}
+		} else if state == 0 {
+			if TipoToken := validators.IsPunc(lexema); len(TipoToken) > 0 {
+				tokens = append(tokens, &token.Token{
+					Tipo:   TipoToken,
+					Lexema: lexema,
+					Linea:  linea,
+				})
+				state = 0
+				lexema = ""
+				i--
 			}
 		}
 	}
