@@ -129,11 +129,14 @@ func Scan(source string) []*token.Token {
 						Linea:  linea,
 					}
 					if TokenReservado.Tipo == token.True {
-						TokenReservado.Literal = 1
+						TokenReservado.Literal = true
+						TokenReservado.PrintLiteral = true
 					} else if TokenReservado.Tipo == token.False {
-						TokenReservado.Literal = 0
+						TokenReservado.Literal = false
+						TokenReservado.PrintLiteral = true
 					} else if TokenReservado.Tipo == token.Null {
 						TokenReservado.Literal = nil
+						TokenReservado.PrintLiteral = true
 					}
 					tokens = append(tokens, TokenReservado)
 
@@ -164,12 +167,14 @@ func Scan(source string) []*token.Token {
 				state = 18
 				lexema += string(character)
 			} else {
+				// solo es numero entero
 				tokens = append(tokens, &token.Token{
-					Tipo:        token.Number,
-					Lexema:      lexema,
-					PrintLexema: true,
-					Linea:       linea,
-					Literal:     validators.ValidarLiteralNumerico(lexema),
+					Tipo:         token.Number,
+					Lexema:       lexema,
+					PrintLexema:  true,
+					Linea:        linea,
+					PrintLiteral: true,
+					Literal:      validators.ValidarLiteralNumerico(lexema),
 				})
 
 				lexema = ""
@@ -187,12 +192,14 @@ func Scan(source string) []*token.Token {
 				state = 18
 				lexema += string(character)
 			} else {
+				// aqui es flotante
 				tokens = append(tokens, &token.Token{
-					Tipo:        token.Number,
-					Lexema:      lexema,
-					PrintLexema: true,
-					Linea:       linea,
-					Literal:     lexema,
+					Tipo:         token.Number,
+					Lexema:       lexema,
+					PrintLexema:  true,
+					Linea:        linea,
+					PrintLiteral: true,
+					Literal:      validators.ValidarLiteralNumerico(lexema),
 				})
 				state = 0
 				i--
@@ -212,12 +219,14 @@ func Scan(source string) []*token.Token {
 				lexema += string(character)
 				state = 20
 			} else {
+				// aqui es exponencial
 				tokens = append(tokens, &token.Token{
-					Tipo:        token.Number,
-					Lexema:      lexema,
-					PrintLexema: true,
-					Linea:       linea,
-					Literal:     lexema,
+					Tipo:         token.Number,
+					Lexema:       lexema,
+					PrintLexema:  true,
+					Linea:        linea,
+					PrintLiteral: true,
+					Literal:      validators.ValidarLiteralNumerico(lexema),
 				})
 				i--
 				lexema = ""
@@ -229,17 +238,18 @@ func Scan(source string) []*token.Token {
 			if character == '"' {
 
 				tokens = append(tokens, &token.Token{
-					Tipo:        token.String,
-					Lexema:      lexema,
-					PrintLexema: true,
-					Linea:       linea,
-					Literal:     lexema,
+					Tipo:         token.String,
+					Lexema:       lexema,
+					PrintLexema:  true,
+					PrintLiteral: true,
+					Linea:        linea,
+					Literal:      lexema,
 				})
 
 				lexema = ""
 				state = 0
 			} else if character == '\n' {
-				panic("error: salto de linea")
+				panic(fmt.Sprintf("error: salto de linea,linea: %d", linea))
 			} else {
 				lexema += string(character)
 			}
@@ -310,10 +320,16 @@ func Scan(source string) []*token.Token {
 			state = 0
 			lexema = ""
 		} else {
-			panic(fmt.Sprintf("error: Simbolo no valido: %s", string(character)))
+			panic(fmt.Sprintf("error: Simbolo no valido: %s, linea: %d", string(character), linea))
 		}
 		//fmt.Printf("State %d\t,caracter %s\t,index:%d\n", state, string(character), i)
 	}
+
+	tokens = append(tokens, &token.Token{
+		Tipo:        token.EOF,
+		Lexema:      "$",
+		PrintLexema: true,
+	})
 
 	return tokens
 }
