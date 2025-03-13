@@ -116,22 +116,30 @@ func Scan(source string) []*token.Token {
 
 			lexema = ""
 			state = 0
-		} else if state == 0 && validators.IsLetter(string(character)) {
+		} else if state == 0 && unicode.IsLetter(character) {
 			state = 13
 			lexema += string(character)
 		} else if state == 13 {
-			if validators.IsLetterOrNumber(string(character)) {
+			if unicode.IsDigit(character) || unicode.IsLetter(character) {
 				lexema += string(character)
-				// state = 13
+				state = 13
 			} else {
 				// validar palabra resevada
-				state = 14
 				if TipoToken := validators.IsReservedWord(lexema); len(TipoToken) > 0 {
-					tokens = append(tokens, &token.Token{
+					TokenReservado := &token.Token{
 						Tipo:   TipoToken,
 						Lexema: lexema,
 						Linea:  linea,
-					})
+					}
+					if TokenReservado.Tipo == token.True {
+						TokenReservado.Literal = 1
+					} else if TokenReservado.Tipo == token.False {
+						TokenReservado.Literal = 0
+					} else if TokenReservado.Tipo == token.Null {
+						TokenReservado.Literal = nil
+					}
+					tokens = append(tokens, TokenReservado)
+
 				} else { // si no es reservada es un identificador
 					tokens = append(tokens, &token.Token{
 						Tipo:        token.Identifier,
@@ -144,6 +152,7 @@ func Scan(source string) []*token.Token {
 				state = 0
 				i--
 			}
+
 		} else if state == 0 && unicode.IsDigit(character) {
 			state = 15
 			lexema += string(character)
@@ -163,7 +172,7 @@ func Scan(source string) []*token.Token {
 					Lexema:      lexema,
 					PrintLexema: true,
 					Linea:       linea,
-					Literal:     lexema,
+					Literal:     validators.ValidarLiteralNumerico(lexema),
 				})
 
 				lexema = ""
@@ -306,7 +315,7 @@ func Scan(source string) []*token.Token {
 		} else {
 			panic(fmt.Sprintf("error: Simbolo no valido: %s", string(character)))
 		}
-		//fmt.Printf("State %d,caracter %s\n", state, string(character))
+		//fmt.Printf("State %d\t,caracter %s\t,index:%d\n", state, string(character), i)
 	}
 
 	return tokens
