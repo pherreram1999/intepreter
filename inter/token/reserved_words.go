@@ -14,4 +14,6 @@ const (
 	True       TipoToken = "TRUE"
 	Identifier TipoToken = "IDENTIFIER"
 	Input      TipoToken = "INPUT"
+	Or         TipoToken = "OR"
+	And        TipoToken = "AND"
 )
