@@ -239,14 +239,14 @@ func Scan(source string) []*token.Token {
 			}
 		} else if state == 0 && character == '/' {
 			state = 26
-			lexema += string(character)
+			//lexema += string(character)
 		} else if state == 26 {
 			if character == '/' {
 				state = 30
-				lexema += string(character)
+				//lexema += string(character)
 			} else if character == '*' {
 				state = 27
-				lexema += string(character)
+				//lexema += string(character)
 			} else {
 				tokens = append(tokens, &token.Token{
 					Tipo:   token.Slash,
@@ -260,29 +260,29 @@ func Scan(source string) []*token.Token {
 		} else if state == 27 {
 			if character == '*' {
 				state = 28
-				lexema += string(character)
+				//lexema += string(character)
 			} else {
 				state = 27
-				lexema += string(character)
+				//lexema += string(character)
 			}
 			// de lo contrario se queda en 27
 		} else if state == 28 {
 			if character == '*' {
 				// se queda en el mismo
-				lexema += string(character)
+				//lexema += string(character)
 			} else if character == '/' {
 				state = 0
 				lexema = ""
 			} else {
 				state = 27
-				lexema += string(character)
+				//lexema += string(character)
 			}
 		} else if state == 30 {
 			if character == '\n' {
 				state = 0
 				lexema += ""
 			} else {
-				lexema += string(character)
+				//lexema += string(character)
 			}
 		} else if state == 0 && unicode.IsSpace(character) || validators.IsDelim(character) {
 			lexema += string(character)

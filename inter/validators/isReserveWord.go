@@ -30,6 +30,10 @@ func IsReservedWord(word string) token.TipoToken {
 		return token.True
 	case "input":
 		return token.Input
+	case "or":
+		return token.Or
+	case "and":
+		return token.And
 	default:
 		return ""
 	}
