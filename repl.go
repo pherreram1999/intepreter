@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
 )
 
 func sayGooBay() {
@@ -20,13 +19,9 @@ func repl() {
 	for {
 		fmt.Print("-> ")
 		input, err := reader.ReadString('\n')
-
 		if err == io.EOF {
 			sayGooBay()
 		}
-
-		input = strings.TrimSuffix(input, "\n")
-		input = strings.TrimSpace(input)
 
 		switch input {
 		case "exit":

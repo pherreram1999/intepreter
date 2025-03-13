@@ -8,9 +8,6 @@ import (
 )
 
 func Scan(source string) []*token.Token {
-
-	validators.Init()
-
 	var tokens []*token.Token
 	var lexema string
 	var state uint
