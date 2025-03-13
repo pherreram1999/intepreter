@@ -144,13 +144,13 @@ func Scan(source string) []*token.Token {
 				state = 0
 				i--
 			}
-		} else if state == 0 && validators.IsNumber(string(character)) {
+		} else if state == 0 && unicode.IsDigit(character) {
 			state = 15
 			lexema += string(character)
 		} else if state == 15 {
-			if validators.IsNumber(string(character)) {
+			if unicode.IsDigit(character) {
 				lexema += string(character)
-				// state = 15
+				state = 15
 			} else if character == '.' {
 				state = 16
 				lexema += string(character)
@@ -170,13 +170,13 @@ func Scan(source string) []*token.Token {
 				i--
 				state = 0
 			}
-		} else if state == 16 && validators.IsNumber(string(character)) {
+		} else if state == 16 && unicode.IsDigit(character) {
 			lexema += string(character)
 			state = 17
 		} else if state == 17 {
-			if validators.IsNumber(string(character)) {
+			if unicode.IsDigit(character) {
 				lexema += string(character)
-				// state = 17
+				state = 17
 			} else if character == 'E' {
 				state = 18
 				lexema += string(character)
@@ -195,16 +195,16 @@ func Scan(source string) []*token.Token {
 		} else if state == 18 && (character == '+' || character == '-') {
 			state = 19
 			lexema += string(character)
-		} else if state == 18 && validators.IsNumber(string(character)) {
+		} else if state == 18 && unicode.IsDigit(character) {
 			state = 20
 			lexema += string(character)
-		} else if state == 19 && validators.IsNumber(string(character)) {
+		} else if state == 19 && unicode.IsDigit(character) {
 			state = 20
 			lexema += string(character)
 		} else if state == 20 {
-			if validators.IsNumber(string(character)) {
+			if unicode.IsDigit(character) {
 				lexema += string(character)
-				// state = 20
+				state = 20
 			} else {
 				tokens = append(tokens, &token.Token{
 					Tipo:        token.Number,
