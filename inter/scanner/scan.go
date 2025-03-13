@@ -249,7 +249,7 @@ func Scan(source string) []*token.Token {
 				lexema = ""
 				state = 0
 			} else if character == '\n' {
-				panic(fmt.Sprintf("error: salto de linea,linea: %d", linea))
+				panic(fmt.Sprintf("error: Se detecto una cadena sin cerrar en la linea %d", linea))
 			} else {
 				lexema += string(character)
 			}
@@ -320,7 +320,7 @@ func Scan(source string) []*token.Token {
 			state = 0
 			lexema = ""
 		} else {
-			panic(fmt.Sprintf("error: Simbolo no valido: %s, linea: %d", string(character), linea))
+			panic(fmt.Sprintf("error: Simbolo no valido: %s en la linea %d", string(character), linea))
 		}
 		//fmt.Printf("State %d\t,caracter %s\t,index:%d\n", state, string(character), i)
 	}
