@@ -8,6 +8,7 @@ import (
 )
 
 func Scan(source string) []*token.Token {
+	source += "\000"
 	var tokens []*token.Token
 	var lexema string
 	var state uint

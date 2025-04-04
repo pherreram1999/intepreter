@@ -14,8 +14,6 @@ func IsPunc(p rune) token.TipoToken {
 		return token.Semicolon
 	case ',':
 		return token.Comma
-	case '.':
-		return token.Dot
 	case '(':
 		return token.LeftParen
 	case ')':
