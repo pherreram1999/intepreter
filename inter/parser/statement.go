@@ -1,3 +1,3 @@
-package syntax
+package parser
 
 func (p *Parser) statement() {}

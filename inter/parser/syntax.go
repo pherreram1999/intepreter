@@ -1,8 +1,8 @@
-package syntax
+package parser
 
 import "pahm/intepreter/inter/token"
 
 func Analizador(tokens []*token.Token) {
-	parser := newParser(tokens)
+	parser := NewParser(tokens)
 
 }

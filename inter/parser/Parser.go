@@ -1,4 +1,4 @@
-package syntax
+package parser
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ type Parser struct {
 	PreaAnalisis *token.Token
 }
 
-func newParser(tokens []*token.Token) *Parser {
+func NewParser(tokens []*token.Token) *Parser {
 	return &Parser{
 		Tokens:       tokens,
 		Index:        0,
