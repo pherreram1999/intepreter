@@ -2,13 +2,14 @@ package scanner
 
 import (
 	"fmt"
+	"log"
 	"pahm/intepreter/inter/token"
 	"pahm/intepreter/inter/validators"
 	"unicode"
 )
 
 func Scan(source string) []*token.Token {
-	source += "\000"
+	//source += "\000" // TODO cechar el caracter final (se queda infinito en ocasiones)
 	var tokens []*token.Token
 	var lexema string
 	var state uint
@@ -321,7 +322,7 @@ func Scan(source string) []*token.Token {
 			state = 0
 			lexema = ""
 		} else {
-			panic(fmt.Sprintf("error: Simbolo no valido: %s en la linea %d", string(character), linea))
+			log.Fatalln(fmt.Sprintf("Error Lexico: Simbolo no valido: [%s] (caracter no: %d) en la linea %d", string(character), character, linea))
 		}
 		//fmt.Printf("State %d\t,caracter %s\t,index:%d\n", state, string(character), i)
 	}
