@@ -34,7 +34,7 @@ func (p *Parser) Match(expected token.TipoToken) {
 		// avanzamos al siguiente tipo
 		p.Index++
 		if p.Index < len(p.Tokens) {
-			p.PreaAnalisis = p.Tokens[p.Index-1]
+			p.PreaAnalisis = p.Tokens[p.Index]
 		}
 	} else {
 		p.Error(expected)

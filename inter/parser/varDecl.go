@@ -1,6 +1,8 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/token"
+)
 
 func (p *Parser) varDecl() {
 	p.Match(token.Var)
