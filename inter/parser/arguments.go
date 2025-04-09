@@ -1,3 +1,5 @@
 package parser
 
-func (p *Parser) arguments() {}
+func (p *Parser) arguments() {
+
+}

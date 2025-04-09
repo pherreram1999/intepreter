@@ -1,3 +1,8 @@
 package parser
 
-func (p *Parser) parameters() {}
+import "pahm/intepreter/inter/token"
+
+func (p *Parser) parameters() {
+	p.Match(token.Identifier)
+	p.parametersT()
+}

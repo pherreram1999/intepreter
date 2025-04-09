@@ -1,3 +1,6 @@
 package parser
 
-func (p *Parser) call() {}
+func (p *Parser) call() {
+	p.primary()
+	p.callT()
+}

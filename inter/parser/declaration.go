@@ -6,15 +6,14 @@ func (p *Parser) Declaration() {
 	switch p.PreaAnalisis.Tipo {
 	case token.Fun:
 		p.funDecl()
+		p.Declaration()
 	case token.Var:
 		p.varDecl()
+		p.Declaration()
 	case token.Print:
-		p.printStmt()
-	case token.If:
 		p.statement()
-	case token.While:
-		p.statement()
-	case token.For:
-		p.statement()
+		p.Declaration()
+	default:
+		return // epsilon (ε) (vacío)
 	}
 }
