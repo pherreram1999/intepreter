@@ -20,5 +20,10 @@ func (p *Parser) primary() {
 		p.Match(token.LeftParen)
 		p.expression()
 		p.Match(token.RightParen)
+	case token.Input:
+		p.Match(token.Input)
+		p.Match(token.LeftParen)
+		p.expression()
+		p.Match(token.RightParen)
 	}
 }

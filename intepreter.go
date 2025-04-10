@@ -19,16 +19,14 @@ func execute(code string) {
 	if len(tokens) == 0 {
 		log.Fatalln("no token found")
 	}
-	// ejecutamos el programa
 	p := parser.NewParser(tokens)
 	p.Program()
-	//printTokens(tokens)
 
 	// si esta esta correcto debio llegar al EOF
 	if p.PreaAnalisis.Tipo == token.EOF {
-		fmt.Println("Todo well")
+		fmt.Println("programa valido")
 	} else {
-		log.Printf("todo wrong: token actual | %s\n", p.PreaAnalisis)
+		log.Fatalln("!!!!! PROGRAMA INVALIDA :O  -> token actual | %s\n", p.PreaAnalisis)
 	}
 
 }

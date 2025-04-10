@@ -1,6 +1,8 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/token"
+)
 
 func (p *Parser) printStmt() {
 	p.Match(token.Print)

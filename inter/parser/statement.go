@@ -19,6 +19,8 @@ func (p *Parser) statement() {
 		p.returnStmt()
 	} else if p.PreaAnalisis.Tipo == token.While {
 		p.whileStmt()
+	} else if p.PreaAnalisis.Tipo == token.Input {
+		p.inputSmt() // la nueva caracteristica
 	} else {
 		p.expStmt()
 	}

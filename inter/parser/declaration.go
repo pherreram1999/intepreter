@@ -13,9 +13,9 @@ func isStatement(t token.TipoToken) bool {
 		t == token.While {
 		return true
 	}
-
 	return false
 }
+
 func isExpression(t token.TipoToken) bool {
 	if t == token.Identifier ||
 		t == token.True ||
@@ -23,11 +23,13 @@ func isExpression(t token.TipoToken) bool {
 		t == token.Null ||
 		t == token.Number ||
 		t == token.String ||
+		t == token.Input ||
 		t == token.LeftParen {
 		return true
 	}
 	return false
 }
+
 func (p *Parser) Declaration() {
 	if p.PreaAnalisis.Tipo == token.Fun {
 		p.funDecl()
@@ -38,8 +40,6 @@ func (p *Parser) Declaration() {
 	} else if isStatement(p.PreaAnalisis.Tipo) || isExpression(p.PreaAnalisis.Tipo) {
 		p.statement()
 		p.Declaration()
-	} else {
-
 	}
 
 }
