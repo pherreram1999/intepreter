@@ -32,10 +32,12 @@ func (p *Parser) Error(expected token.TipoToken) {
 func (p *Parser) Match(expected token.TipoToken) {
 	if p.PreaAnalisis.Tipo == expected {
 		// avanzamos al siguiente tipo
+		oldToken := p.Tokens[p.Index]
 		p.Index++
 		if p.Index < len(p.Tokens) {
 			p.PreaAnalisis = p.Tokens[p.Index]
 		}
+		log.Println("prev token:", oldToken, "| next token:", p.PreaAnalisis)
 	} else {
 		p.Error(expected)
 	}

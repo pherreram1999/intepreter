@@ -12,7 +12,7 @@ else if (num2 > num1 and num2 > num3){
     print "El numero mayor es: ";
     print num2;
 }
-else{
+else {
     print "El numero mayor es: ";
     print num3;
 }

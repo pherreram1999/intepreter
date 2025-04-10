@@ -2,6 +2,7 @@ package token
 
 import (
 	"fmt"
+	"log"
 )
 
 type Token struct {
@@ -11,6 +12,10 @@ type Token struct {
 	PrintLexema  bool
 	PrintLiteral bool
 	Linea        uint
+}
+
+func (t *Token) Debug() {
+	log.Println(t)
 }
 
 func (t *Token) String() string {

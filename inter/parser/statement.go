@@ -1,6 +1,8 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/token"
+)
 
 // TODO checar si input entra qui
 func (p *Parser) statement() {

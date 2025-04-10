@@ -1,12 +1,15 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/token"
+)
 
 func isStatement(t token.TipoToken) bool {
 	if t == token.Print ||
 		t == token.If ||
 		t == token.For ||
 		t == token.Return ||
+		t == token.LeftBrace || // para los bloques
 		t == token.While {
 		return true
 	}
@@ -15,7 +18,6 @@ func isStatement(t token.TipoToken) bool {
 }
 
 func (p *Parser) Declaration() {
-
 	if p.PreaAnalisis.Tipo == token.Fun {
 		p.funDecl()
 		p.Declaration()
@@ -25,8 +27,6 @@ func (p *Parser) Declaration() {
 	} else if isStatement(p.PreaAnalisis.Tipo) {
 		p.statement()
 		p.Declaration()
-	} else {
-		return // epsilon
 	}
 
 }
