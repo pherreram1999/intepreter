@@ -12,9 +12,10 @@ fun mayor(num1, num2, num3){
     return num3;
 
 
-var numero1 = 0; // Introduce un numero
-var numero2 = 0; // Introduce un numero
-var numero3 = 0; // Introduce un numero
+var numero1 = 4; // Introduce un numero
+var numero2 = 6; // Introduce un numero
+var numero3 = 7; // Introduce un numero
 
 print "El número mayor es: ";
 print mayor();
+}

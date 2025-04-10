@@ -3,11 +3,12 @@
 
 var i = "Hola mundo";
 
-while (i < N) {
-    i= i+1;
+while (i < N){
+    i = i+1;
 
     if(i == 100){
         i = N;
     }
     print i;
 }
+

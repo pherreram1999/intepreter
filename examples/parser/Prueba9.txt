@@ -2,4 +2,4 @@
 // No tiene errores sintactico;
 
 var areaNegativa = -(base * altura) / 2;
-pritn !area;
+print !area;
