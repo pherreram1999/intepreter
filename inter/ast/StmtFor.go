@@ -4,12 +4,12 @@ import "pahm/intepreter/inter/token"
 
 type ForStatement struct {
 	Initializer Statement
-	Condition   Statement
-	Increment   Statement
+	Condition   Expression
+	Increment   Expression
 	Body        Statement
 }
 
-func NewForStatement(initializer Statement, condition, increment, body Statement) *ForStatement {
+func NewForStatement(initializer Statement, condition Expression, increment Expression, body Statement) *ForStatement {
 	return &ForStatement{initializer, condition, increment, body}
 }
 func (p *ForStatement) statementNode() {}

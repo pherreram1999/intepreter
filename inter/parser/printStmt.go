@@ -9,5 +9,5 @@ func (p *Parser) printStmt() ast.Statement {
 	p.Match(token.Print)
 	expr := p.expression()
 	p.Match(token.Semicolon)
-	return ast.NewExpressionStatement(expr)
+	return ast.NewPrint(expr)
 }

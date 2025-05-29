@@ -7,7 +7,7 @@ func (p *Parser) parameters() []*token.Token {
 	if p.PreaAnalisis.Tipo == token.Identifier {
 		parameters = append(parameters, p.PreaAnalisis)
 		p.Match(token.Identifier)
-		parameters = append(parameters, p.parametersT())
+		parameters = append(parameters, p.parametersT()...)
 	}
 	return parameters
 }
