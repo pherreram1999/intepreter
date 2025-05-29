@@ -1,7 +1,10 @@
 package parser
 
-func (p *Parser) returnExpOpec() {
+import "pahm/intepreter/inter/ast"
+
+func (p *Parser) returnExpOpec() ast.Expression {
 	if isExpression(p.PreaAnalisis.Tipo) {
-		p.expression()
+		return p.expression()
 	}
+	return nil
 }

@@ -1,12 +1,17 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) funDecl() {
+func (p *Parser) funDecl() ast.Statement {
 	p.Match(token.Fun)
+	name := p.PreaAnalisis
 	p.Match(token.Identifier)
 	p.Match(token.LeftParen)
-	p.parameters()
+	parameters := p.parameters()
 	p.Match(token.RightParen)
-	p.block()
+	body := p.block()
+	return ast.NewFunctionStatement(name, parameters, body)
 }

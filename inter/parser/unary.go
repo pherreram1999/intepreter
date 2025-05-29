@@ -13,6 +13,6 @@ func (p *Parser) unary() ast.Expression {
 		right := p.unary()
 		return ast.NewUnary(right, operator)
 	default:
-		p.call()
+		return p.call()
 	}
 }

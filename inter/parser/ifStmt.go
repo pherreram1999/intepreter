@@ -1,12 +1,17 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) ifStmt() {
+func (p *Parser) ifStmt() ast.Statement {
 	p.Match(token.If)
 	p.Match(token.LeftParen)
-	p.expression()
+	condition := p.expression()
 	p.Match(token.RightParen)
-	p.statement()
-	p.elseStmt()
+	thenBranch := p.statement()
+	var elseBranch ast.Statement
+	elseBranch = p.elseStmt()
+	return ast.NewIfStatement(condition, thenBranch, elseBranch)
 }

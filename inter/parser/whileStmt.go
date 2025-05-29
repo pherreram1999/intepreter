@@ -1,12 +1,15 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) whileStmt() {
+func (p *Parser) whileStmt() ast.Statement {
 	p.Match(token.While)
 	p.Match(token.LeftParen)
-	p.expression()
+	condition := p.expression()
 	p.Match(token.RightParen)
-	p.statement()
-
+	body := p.statement()
+	return ast.NewWhileStatement(condition, body)
 }

@@ -1,11 +1,13 @@
 package parser
 
 import (
+	"pahm/intepreter/inter/ast"
 	"pahm/intepreter/inter/token"
 )
 
-func (p *Parser) printStmt() {
+func (p *Parser) printStmt() ast.Statement {
 	p.Match(token.Print)
-	p.expression()
+	expr := p.expression()
 	p.Match(token.Semicolon)
+	return ast.NewExpressionStatement(expr)
 }

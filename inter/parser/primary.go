@@ -38,11 +38,19 @@ func (p *Parser) primary() ast.Expression {
 		p.Match(token.RightParen)
 		return ast.NewGrouping(expr)
 	case token.Input:
+		tmp = p.PreaAnalisis
 		p.Match(token.Input)
 		p.Match(token.LeftParen)
-		p.expression()
+		var promptExpr ast.Expression
+		if isExpression(p.PreaAnalisis.Tipo) {
+			promptExpr = p.expression()
+		} else if p.PreaAnalisis.Tipo != token.RightParen {
+			p.Error(token.RightParen)
+		}
 		p.Match(token.RightParen)
-		return nil //TODO como implementar el nodo
+		return ast.NewInputExpression(tmp, promptExpr) //TODO como implementar el nodo
+	default:
+		p.Error(p.PreaAnalisis.Tipo)
+		return nil
 	}
-	panic("Error sintactico")
 }

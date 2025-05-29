@@ -1,11 +1,14 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) varInit() {
+func (p *Parser) varInit() ast.Expression {
 	if p.PreaAnalisis.Tipo != token.Equal {
-		return // esta vacio pues
+		return nil // esta vacio pues
 	}
 	p.Match(token.Equal)
-	p.expression()
+	return p.expression()
 }

@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"pahm/intepreter/inter/ast"
 	"pahm/intepreter/inter/token"
 )
 
@@ -30,16 +31,13 @@ func isExpression(t token.TipoToken) bool {
 	return false
 }
 
-func (p *Parser) Declaration() {
+func (p *Parser) Declaration() ast.Statement {
 	if p.PreaAnalisis.Tipo == token.Fun {
 		p.funDecl()
-		p.Declaration()
 	} else if p.PreaAnalisis.Tipo == token.Var {
 		p.varDecl()
-		p.Declaration()
 	} else if isStatement(p.PreaAnalisis.Tipo) || isExpression(p.PreaAnalisis.Tipo) {
 		p.statement()
-		p.Declaration()
 	}
-
+	return nil
 }

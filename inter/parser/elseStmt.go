@@ -1,11 +1,14 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) elseStmt() {
+func (p *Parser) elseStmt() ast.Statement {
 	if p.PreaAnalisis.Tipo != token.Else {
-		return // epsilon
+		return nil // epsilon
 	}
 	p.Match(token.Else)
-	p.statement()
+	return p.statement()
 }

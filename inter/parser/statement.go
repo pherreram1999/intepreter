@@ -1,27 +1,30 @@
 package parser
 
 import (
+	"pahm/intepreter/inter/ast"
 	"pahm/intepreter/inter/token"
 )
 
 // TODO checar si input entra qui
-func (p *Parser) statement() {
+func (p *Parser) statement() ast.Statement {
 	if p.PreaAnalisis.Tipo == token.LeftBrace {
 		// es bloque
-		p.block()
+		return p.block()
 	} else if p.PreaAnalisis.Tipo == token.For {
-		p.forStmt()
+		return p.forStmt()
 	} else if p.PreaAnalisis.Tipo == token.If {
-		p.ifStmt()
+		return p.ifStmt()
 	} else if p.PreaAnalisis.Tipo == token.Print {
-		p.printStmt()
+		return p.printStmt()
 	} else if p.PreaAnalisis.Tipo == token.Return {
-		p.returnStmt()
+		return p.returnStmt()
 	} else if p.PreaAnalisis.Tipo == token.While {
-		p.whileStmt()
+		return p.whileStmt()
 	} else if p.PreaAnalisis.Tipo == token.Input {
-		p.inputSmt() // la nueva caracteristica
+		return p.inputSmt() // la nueva caracteristica
+	} else if isExpression(p.PreaAnalisis.Tipo) {
+		return p.expStmt()
 	} else {
-		p.expStmt()
+		return nil
 	}
 }

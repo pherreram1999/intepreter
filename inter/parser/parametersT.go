@@ -2,11 +2,18 @@ package parser
 
 import "pahm/intepreter/inter/token"
 
-func (p *Parser) parametersT() {
+func (p *Parser) parametersT() []*token.Token {
+	var parameters []*token.Token
 	if p.PreaAnalisis.Tipo != token.Comma {
-		return
+		return parameters
 	}
 	p.Match(token.Comma)
-	p.Match(token.Identifier)
-	p.parametersT()
+	if p.PreaAnalisis.Tipo == token.Identifier {
+		parameters = append(parameters, p.PreaAnalisis)
+		p.Match(token.Identifier)
+		parameters = append(parameters, p.parametersT()...)
+	} else {
+		p.Error(token.Identifier)
+	}
+	return parameters
 }
