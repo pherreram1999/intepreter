@@ -245,7 +245,7 @@ func Scan(source string) []*token.Token {
 					PrintLexema:  true,
 					PrintLiteral: true,
 					Linea:        linea,
-					Literal:      lexema,
+					Literal:      `"` + lexema + `"`,
 				})
 
 				lexema = ""

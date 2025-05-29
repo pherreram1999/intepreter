@@ -1,7 +1,6 @@
 // Prueba 1: Probar print y concatenacion
-// No tiene errores sintácticos
+// Tiene errores sintácticos. Pista: verificar el print
 
-print input("Ingresa tu edad");
 var nombre = "Nombre";
 var apellido = "Apellido";
 

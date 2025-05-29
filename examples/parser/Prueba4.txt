@@ -1,5 +1,5 @@
 // Prueba 4: Probar el while y el if anidados
-// Tiene errores sintácticos
+// No tiene errores sintácticos
 
 var i = "Hola mundo";
 
@@ -11,4 +11,3 @@ while (i < N){
     }
     print i;
 }
-

@@ -45,10 +45,11 @@ func (p *Parser) primary() ast.Expression {
 		if isExpression(p.PreaAnalisis.Tipo) {
 			promptExpr = p.expression()
 		} else if p.PreaAnalisis.Tipo != token.RightParen {
+			// esta vacio y se cierra
 			p.Error(token.RightParen)
 		}
 		p.Match(token.RightParen)
-		return ast.NewInputExpression(tmp, promptExpr) //TODO como implementar el nodo
+		return ast.NewInputExpression(tmp, promptExpr)
 	default:
 		p.Error(p.PreaAnalisis.Tipo)
 		return nil

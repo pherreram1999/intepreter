@@ -26,7 +26,7 @@ func execute(code string) {
 	if p.PreaAnalisis.Tipo == token.EOF {
 		fmt.Println("programa valido")
 	} else {
-		log.Fatalln("!!!!! PROGRAMA INVALIDA :O  -> token actual | %s\n", p.PreaAnalisis)
+		log.Fatalln("!!!!! PROGRAMA INVALIDA :O  -> token actual", p.PreaAnalisis)
 	}
 
 }

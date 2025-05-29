@@ -7,7 +7,7 @@ type IfStatement struct {
 }
 
 func NewIfStatement(condition Expression, thenBranch Statement, elseBranch Statement) *IfStatement {
-	return &IfStatement{Condition: nil, ThenBranch: nil, ElseBranch: nil}
+	return &IfStatement{condition, thenBranch, elseBranch}
 }
 
 func (i *IfStatement) statementNode() {}

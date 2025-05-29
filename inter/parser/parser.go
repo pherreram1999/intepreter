@@ -21,13 +21,21 @@ func NewParser(tokens []*token.Token) *Parser {
 }
 
 func (p *Parser) Error(expected token.TipoToken) {
-	log.Fatalln(fmt.Sprintf(
-		"Error sintáctico en la línea %d. Se esperaba %s pero se recibió %s | last token: %s",
-		p.PreaAnalisis.Linea,
-		expected,
-		p.PreaAnalisis.Lexema,
-		p.PreaAnalisis,
-	))
+	if p.PreaAnalisis.Tipo == token.String {
+		log.Printf(fmt.Sprintf(
+			`Error sintáctico en la línea %d. Se esperaba %s pero se recibió "%s"`,
+			p.PreaAnalisis.Linea,
+			expected,
+			p.PreaAnalisis.Lexema,
+		))
+	} else {
+		log.Println(fmt.Sprintf(
+			"Error sintáctico en la línea %d. Se esperaba %s pero se recibió %s",
+			p.PreaAnalisis.Linea,
+			expected,
+			p.PreaAnalisis.Lexema,
+		))
+	}
 }
 
 func (p *Parser) Match(expected token.TipoToken) {
