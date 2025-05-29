@@ -1,22 +1,18 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) comparisonT() {
+func (p *Parser) comparisonT(left ast.Expression) ast.Expression {
 	switch p.PreaAnalisis.Tipo {
-	case token.Greater:
-		p.Match(token.Greater)
-		p.comparison()
-	case token.GreaterEqual:
-		p.Match(token.GreaterEqual)
-		p.comparison()
-	case token.Less:
-		p.Match(token.Less)
-		p.comparison()
-	case token.LessEqual:
-		p.Match(token.LessEqual)
-		p.comparison()
+	case token.Greater, token.GreaterEqual, token.Less, token.LessEqual:
+		operator := p.PreaAnalisis
+		p.Match(operator.Tipo)
+		right := p.comparison()
+		return ast.NewRelational(left, operator, right)
 	default:
-		return // epsilon
+		return left // epsilon
 	}
 }

@@ -1,18 +1,21 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-// TODO revisar si debe lleva un bucle por lo de asociatividad por la izquierda
-func (p *Parser) equalityT() {
+func (p *Parser) equalityT(left ast.Expression) ast.Expression {
 	expected := p.PreaAnalisis.Tipo
+	var operator *token.Token
+	var right ast.Expression
+	operator = p.PreaAnalisis
 	switch expected {
-	case token.BangEqual:
-		p.Match(token.BangEqual)
-		p.equality()
-	case token.EqualEqual:
-		p.Match(token.EqualEqual)
-		p.equality()
+	case token.BangEqual, token.EqualEqual:
+		p.Match(operator.Tipo)
+		right = p.equality()
 	default:
-		return
+		return left
 	}
+	return ast.NewRelational(left, operator, right)
 }

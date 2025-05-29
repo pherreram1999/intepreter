@@ -1,12 +1,18 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) arguments() {
+func (p *Parser) arguments() []ast.Expression {
 	if p.PreaAnalisis.Tipo == token.RightParen {
 		// significa que llegamos al final de los argumentos, sin nada que hacer
-		return // epsilon
+		return []ast.Expression{} // epsilon
 	}
-	p.expression()
-	p.argumentsT()
+	var argumentos []ast.Expression
+	argumentos = append(argumentos, p.expression())
+	others := p.argumentsT()
+	argumentos = append(argumentos, others...)
+	return argumentos
 }

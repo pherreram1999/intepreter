@@ -1,5 +1,7 @@
 package parser
 
-func (p *Parser) expression() {
-	p.assignment()
+import "pahm/intepreter/inter/ast"
+
+func (p *Parser) expression() ast.Expression {
+	return p.assignment()
 }

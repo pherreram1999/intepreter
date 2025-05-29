@@ -12,4 +12,5 @@ func NewArithmetic(left Expression, operator *token.Token, right Expression) *Ar
 	return &Arithmetic{left, operator, right}
 }
 
-func (a *Arithmetic) expressionNode() {}
+func (a *Arithmetic) expressionNode()        {}
+func (a *Arithmetic) GetToken() *token.Token { return a.operator }

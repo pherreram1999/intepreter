@@ -1,11 +1,16 @@
 package ast
 
+import "pahm/intepreter/inter/token"
+
 type Literal struct {
-	Value interface{}
+	token *token.Token
 }
 
-func NewLiteral(value interface{}) *Literal {
-	return &Literal{value}
+func NewLiteral(token *token.Token) *Literal {
+	return &Literal{token}
 }
 
 func (l *Literal) expressionNode() {}
+func (l *Literal) GetToken() *token.Token {
+	return l.token
+}

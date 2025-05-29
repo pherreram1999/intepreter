@@ -1,6 +1,8 @@
 package parser
 
-func (p *Parser) factor() {
-	p.unary()
-	p.factorT()
+import "pahm/intepreter/inter/ast"
+
+func (p *Parser) factor() ast.Expression {
+	left := p.unary()
+	return p.factorT(left)
 }

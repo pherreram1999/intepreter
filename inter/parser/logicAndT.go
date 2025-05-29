@@ -1,11 +1,16 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) logicAndT() {
+func (p *Parser) logicAndT(left ast.Expression) ast.Expression {
 	if p.PreaAnalisis.Tipo != token.And {
-		return // epsilon
+		return left // epsilon
 	}
+	operator := p.PreaAnalisis
 	p.Match(token.And)
-	p.logicAnd()
+	right := p.logicAnd()
+	return ast.NewLogical(left, operator, right)
 }

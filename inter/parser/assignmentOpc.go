@@ -1,11 +1,24 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"fmt"
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) assignmentOpc() {
+func (p *Parser) assignmentOpc(left ast.Expression) ast.Expression {
 	if p.PreaAnalisis.Tipo != token.Equal {
-		return
+		return left
 	}
+	assignToken := p.PreaAnalisis
 	p.Match(token.Equal)
-	p.expression()
+	value := p.expression()
+
+	if variable, ok := value.(*ast.Variable); ok {
+		return ast.NewAssign(variable.GetToken(), value)
+	} else {
+		fmt.Sprintf("Se esperaba un token '=' en la linea %d \n", assignToken.Linea)
+		p.Error(token.Identifier)
+		return left
+	}
 }

@@ -1,11 +1,16 @@
 package ast
 
-type Goruping struct {
+import "pahm/intepreter/inter/token"
+
+type Grouping struct {
 	Expression Expression
 }
 
-func NewGoruping(expression Expression) *Goruping {
-	return &Goruping{expression}
+func NewGrouping(expression Expression) *Grouping {
+	return &Grouping{expression}
 }
 
-func (g *Goruping) expressionNode() {}
+func (g *Grouping) expressionNode() {}
+func (g *Grouping) GetToken() *token.Token {
+	return nil
+}

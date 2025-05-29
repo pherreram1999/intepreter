@@ -12,4 +12,5 @@ func NewLogical(left Expression, operator *token.Token, right Expression) *Logic
 	return &Logical{left, operator, right}
 }
 
-func (l *Logical) expressionNode() {}
+func (l *Logical) expressionNode()        {}
+func (l *Logical) GetToken() *token.Token { return l.Operator }

@@ -12,4 +12,5 @@ func NewCallFunction(callee Expression, arguments []Expression, paren *token.Tok
 	return &CallFunction{callee, arguments, paren}
 }
 
-func (cf *CallFunction) expressionNode() {}
+func (cf *CallFunction) expressionNode()        {}
+func (cf *CallFunction) GetToken() *token.Token { return cf.Paren }

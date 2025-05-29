@@ -1,6 +1,8 @@
 package parser
 
-func (p *Parser) call() {
-	p.primary()
-	p.callT()
+import "pahm/intepreter/inter/ast"
+
+func (p *Parser) call() ast.Expression {
+	callee := p.primary()
+	return p.callT(callee)
 }

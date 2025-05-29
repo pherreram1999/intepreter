@@ -1,29 +1,48 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) primary() {
+func (p *Parser) primary() ast.Expression {
+	var tmp *token.Token
 	switch p.PreaAnalisis.Tipo {
 	case token.True:
+		tmp = p.PreaAnalisis
 		p.Match(token.True)
+		return ast.NewLiteral(tmp)
 	case token.False:
+		tmp = p.PreaAnalisis
 		p.Match(token.False)
+		return ast.NewLiteral(tmp)
 	case token.Null:
+		tmp = p.PreaAnalisis
 		p.Match(token.Null)
+		return ast.NewLiteral(tmp)
 	case token.Number:
+		tmp = p.PreaAnalisis
 		p.Match(token.Number)
+		return ast.NewLiteral(tmp)
 	case token.String:
+		tmp = p.PreaAnalisis
 		p.Match(token.String)
+		return ast.NewLiteral(tmp)
 	case token.Identifier:
+		tmp = p.PreaAnalisis
 		p.Match(token.Identifier)
+		return ast.NewVariable(tmp)
 	case token.LeftParen:
 		p.Match(token.LeftParen)
-		p.expression()
+		expr := p.expression()
 		p.Match(token.RightParen)
+		return ast.NewGrouping(expr)
 	case token.Input:
 		p.Match(token.Input)
 		p.Match(token.LeftParen)
 		p.expression()
 		p.Match(token.RightParen)
+		return nil //TODO como implementar el nodo
 	}
+	panic("Error sintactico")
 }

@@ -1,17 +1,18 @@
 package parser
 
-import "pahm/intepreter/inter/token"
+import (
+	"pahm/intepreter/inter/ast"
+	"pahm/intepreter/inter/token"
+)
 
-func (p *Parser) factorT() {
+func (p *Parser) factorT(left ast.Expression) ast.Expression {
 	switch p.PreaAnalisis.Tipo {
-	case token.Slash:
-		p.Match(token.Slash)
-		p.factor()
-	case token.Star:
-		p.Match(token.Star)
-		p.factor()
+	case token.Slash, token.Star:
+		operator := p.PreaAnalisis
+		p.Match(operator.Tipo)
+		right := p.factor()
+		return ast.NewArithmetic(left, operator, right)
 	default:
-		return // epsilon
-
+		return left // epsilon
 	}
 }

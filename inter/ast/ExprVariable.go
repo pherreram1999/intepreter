@@ -3,10 +3,13 @@ package ast
 import "pahm/intepreter/inter/token"
 
 type Variable struct {
-	Name *token.Token
+	Token *token.Token
 }
 
-func NewVariable(name *token.Token) *Variable {
-	return &Variable{name}
+func NewVariable(token *token.Token) *Variable {
+	return &Variable{token}
 }
 func (v *Variable) expressionNode() {}
+func (v *Variable) GetToken() *token.Token {
+	return v.Token
+}

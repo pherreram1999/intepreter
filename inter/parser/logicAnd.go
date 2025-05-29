@@ -1,6 +1,8 @@
 package parser
 
-func (p *Parser) logicAnd() {
-	p.equality()
-	p.logicAndT()
+import "pahm/intepreter/inter/ast"
+
+func (p *Parser) logicAnd() ast.Expression {
+	left := p.equality()
+	return p.logicAndT(left)
 }

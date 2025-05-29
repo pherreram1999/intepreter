@@ -1,6 +1,9 @@
 package parser
 
-func (p *Parser) equality() {
-	p.comparison()
-	p.equalityT()
+import "pahm/intepreter/inter/ast"
+
+func (p *Parser) equality() ast.Expression {
+	left := p.comparison()
+	return p.equalityT(left)
+
 }
