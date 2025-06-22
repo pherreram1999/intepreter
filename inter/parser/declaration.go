@@ -33,11 +33,12 @@ func isExpression(t token.TipoToken) bool {
 
 func (p *Parser) Declaration() ast.Statement {
 	if p.PreaAnalisis.Tipo == token.Fun {
-		p.funDecl()
+		return p.funDecl()
 	} else if p.PreaAnalisis.Tipo == token.Var {
-		p.varDecl()
+		return p.varDecl()
 	} else if isStatement(p.PreaAnalisis.Tipo) || isExpression(p.PreaAnalisis.Tipo) {
-		p.statement()
+		return p.statement()
 	}
+	p.Error("error sintactico, se espera una declaracion")
 	return nil
 }
